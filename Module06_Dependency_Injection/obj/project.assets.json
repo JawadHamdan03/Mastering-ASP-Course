@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hamda\\OneDrive\\سطح المكتب\\Mastering ASP\\Module06_Dependency_Injection\\Module06_Dependency_Injection.csproj",
+      "projectUniqueName": "c:\\Users\\hamda\\Desktop\\Mastering ASP\\Module06_Dependency_Injection\\Module06_Dependency_Injection.csproj",
       "projectName": "Module06_Dependency_Injection",
-      "projectPath": "C:\\Users\\hamda\\OneDrive\\سطح المكتب\\Mastering ASP\\Module06_Dependency_Injection\\Module06_Dependency_Injection.csproj",
+      "projectPath": "c:\\Users\\hamda\\Desktop\\Mastering ASP\\Module06_Dependency_Injection\\Module06_Dependency_Injection.csproj",
       "packagesPath": "C:\\Users\\hamda\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hamda\\OneDrive\\سطح المكتب\\Mastering ASP\\Module06_Dependency_Injection\\obj\\",
+      "outputPath": "c:\\Users\\hamda\\Desktop\\Mastering ASP\\Module06_Dependency_Injection\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
