@@ -1,11 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
 
-
+builder.Services.AddScoped<WetherService>();
 var app = builder.Build();
 
-app.MapGet("/wether/{cityName}", (string cityName) =>
+app.MapGet("/wether/{cityName}", (string cityName, WetherService wetherService) =>
 {
-    var wetherService = new WetherService();
     return Results.Ok(wetherService.GetCurrentTemperature(cityName));
 });
 
