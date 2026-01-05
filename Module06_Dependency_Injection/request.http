@@ -1,0 +1,4 @@
+@baseURL=http://localhost:5139
+
+
+GET {{baseURL}}
