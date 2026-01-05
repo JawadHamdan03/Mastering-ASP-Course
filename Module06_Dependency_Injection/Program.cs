@@ -1,7 +1,7 @@
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddTransient<IWetherClient, WetherClient>();
-builder.Services.AddTransient<IWetherService, WetherService>();
 
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddWetherServices();
 
 
 var app = builder.Build();
