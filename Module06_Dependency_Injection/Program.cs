@@ -6,8 +6,9 @@ builder.Services.AddTransient<IWetherService, WetherService>();
 
 var app = builder.Build();
 
-app.MapGet("/wether/{cityName}", (string cityName, IWetherService wetherService) =>
+app.MapGet("/wether/{cityName}", (string cityName, IWetherService wetherService, ILogger<Program> logger) =>
 {
+    logger.LogInformation($"Temperature of {cityName} was read at {DateTime.Now}");
     return Results.Ok(wetherService.GetCurrentTemperature(cityName));
 });
 
