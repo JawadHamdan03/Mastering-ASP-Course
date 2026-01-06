@@ -4,23 +4,20 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddTransient<IDependencyInversion, V1>();
-builder.Services.AddTransient<IDependencyInversion, V2>();
-builder.Services.TryAddTransient<IDependencyInversion, V1>();
+builder.Services.AddKeyedTransient<IDependencyInversion, V1>("V1");
+builder.Services.AddKeyedTransient<IDependencyInversion, V2>("V2");
+// To control which service i want to use at runtime we use keyed services
 
-// 📝 when Registering more than one Service to the same Abstraction, the last one is seen 
-// use TryAddTransient to prevent registering the exact same service
 var app = builder.Build();
 
-app.MapGet("/service", (IEnumerable<IDependencyInversion> services) =>
+app.MapGet("/v1", ([FromKeyedServices("V1")] IDependencyInversion service) =>
 {
-    string response = string.Empty;
+    return Results.Ok(service.doSomthing());
+});
 
-    foreach (var service in services)
-        response += "||" + service.doSomthing();
-
-
-    return Results.Ok(response);
+app.MapGet("/v2", ([FromKeyedServices("V2")] IDependencyInversion service) =>
+{
+    return Results.Ok(service.doSomthing());
 });
 
 // get number of registerd services under the IDependencyInversion
