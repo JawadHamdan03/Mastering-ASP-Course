@@ -1,11 +1,15 @@
 
+using Microsoft.Extensions.DependencyInjection.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddTransient<IDependencyInversion, V1>();
 builder.Services.AddTransient<IDependencyInversion, V2>();
-// 📝 when Registering more than one Service to the same Abstraction, the last one is seen 
+builder.Services.TryAddTransient<IDependencyInversion, V1>();
 
+// 📝 when Registering more than one Service to the same Abstraction, the last one is seen 
+// use TryAddTransient to prevent registering the exact same service
 var app = builder.Build();
 
 app.MapGet("/service", (IEnumerable<IDependencyInversion> services) =>
@@ -17,6 +21,13 @@ app.MapGet("/service", (IEnumerable<IDependencyInversion> services) =>
 
 
     return Results.Ok(response);
+});
+
+// get number of registerd services under the IDependencyInversion
+app.MapGet("/get-dependencies-count", (IServiceProvider service) =>
+{
+    return Results.Ok(service.GetServices<IDependencyInversion>().Count());
+
 });
 
 app.Run();
