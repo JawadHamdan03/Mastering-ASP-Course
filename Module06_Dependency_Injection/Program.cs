@@ -1,28 +1,43 @@
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Services.AddWetherServices();
 
-
-builder.Services.AddTransient<IWetherClient, WetherClient>();
-
-builder.Services.Add(new ServiceDescriptor(
-    typeof(IWetherService),
-    typeof(WetherService),
-    ServiceLifetime.Transient
-));
-
+builder.Services.AddTransient<IDependencyInversion, V1>();
+builder.Services.AddTransient<IDependencyInversion, V2>();
+// 📝 when Registering more than one Service to the same Abstraction, the last one is seen 
 
 var app = builder.Build();
 
-app.MapGet("/wether/{cityName}", (string cityName, IWetherService wetherService, ILogger<Program> logger) =>
+app.MapGet("/service", (IDependencyInversion service) =>
 {
-    logger.LogInformation($"Temperature of {cityName} was read at {DateTime.Now}");
-    return Results.Ok(wetherService.GetCurrentTemperature(cityName));
+    return Results.Ok(service.doSomthing());
 });
 
 app.Run();
 
+
+interface IDependencyInversion
+{
+    string doSomthing();
+}
+
+
+public class V1 : IDependencyInversion
+{
+    public string doSomthing()
+    {
+        return "inside V1 service";
+    }
+}
+
+
+public class V2 : IDependencyInversion
+{
+    public string doSomthing()
+    {
+        return "inside V2 Service";
+    }
+}
 
 
 interface IWetherService
