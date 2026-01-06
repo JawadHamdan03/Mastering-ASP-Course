@@ -8,9 +8,15 @@ builder.Services.AddTransient<IDependencyInversion, V2>();
 
 var app = builder.Build();
 
-app.MapGet("/service", (IDependencyInversion service) =>
+app.MapGet("/service", (IEnumerable<IDependencyInversion> services) =>
 {
-    return Results.Ok(service.doSomthing());
+    string response = string.Empty;
+
+    foreach (var service in services)
+        response += "||" + service.doSomthing();
+
+
+    return Results.Ok(response);
 });
 
 app.Run();
