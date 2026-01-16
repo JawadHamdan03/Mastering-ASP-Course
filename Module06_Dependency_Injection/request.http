@@ -1,13 +1,12 @@
 @baseURL=http://localhost:5139
 
 
-## v1
-GET {{baseURL}}/v1
+### v1
+{{baseURL}}/v1 
 
-## v2
-GET {{baseURL}}/v2 HTTP/1.1
+### v2
+{{baseURL}}/v2 HTTP/1.1
 
-GET url HTTP/1.1
 
 
 

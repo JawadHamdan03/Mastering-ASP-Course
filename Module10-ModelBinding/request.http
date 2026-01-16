@@ -1,0 +1,5 @@
+@baseURL = https://localhost:7204
+
+
+### 
+GET {{baseURL}}/product-minimal/42
