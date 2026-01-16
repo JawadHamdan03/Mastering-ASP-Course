@@ -13,9 +13,15 @@ var app = builder.Build();
 //{
 //    return Results.Ok($"showing {pageSize} of page #{page}");
 //});
-app.MapGet("/product-minimal", ([FromQuery(Name ="page")]int p ,[FromQuery(Name ="pageSize")] int ps ) =>
+//app.MapGet("/product-minimal", ([FromQuery(Name ="page")]int p ,[FromQuery(Name ="pageSize")] int ps ) =>
+//{
+//    return Results.Ok($"showing {ps} of page #{p}");
+//});
+
+
+app.MapGet("/product-minimal", ([AsParameters]QueryRequest request ) => 
 {
-    return Results.Ok($"showing {ps} of page #{p}");
+    return Results.Ok(request);
 });
 
 
@@ -23,3 +29,18 @@ app.MapGet("/product-minimal", ([FromQuery(Name ="page")]int p ,[FromQuery(Name 
 app.MapControllers();
 
 app.Run();
+
+
+
+class QueryRequest
+{
+    public string query { get; set; }
+    public int pageSize { get; set; }
+    public int page { get; set; }
+}
+
+
+
+
+
+

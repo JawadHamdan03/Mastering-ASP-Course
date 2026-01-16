@@ -8,12 +8,17 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "page",
+        "Name": "Query",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "PageSize",
         "Type": "System.Int32",
         "IsRequired": true
       },
       {
-        "Name": "pageSize",
+        "Name": "Page",
         "Type": "System.Int32",
         "IsRequired": true
       }
