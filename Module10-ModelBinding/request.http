@@ -2,4 +2,4 @@
 
 
 ### 
-GET {{baseURL}}/product-minimal/42
+GET {{baseURL}}/product-minimal?page=1&pageSize=10
